@@ -10,10 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SignApp">
         <activity
-            android:name=".SignUpAcitivity"
+            android:name=".SiteActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".signUpScreen.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".loginScreen.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

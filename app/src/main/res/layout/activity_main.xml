@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:id="@+id/note_container"
     android:background="@color/design_default_color_background"
-    tools:context=".MainActivity">
+    tools:context=".loginScreen.MainActivity">
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -27,8 +27,7 @@
             android:id="@+id/error_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="You have typed a wrong password !!!"
-            android:textColor="@color/teal_700"
+            android:textColor="@color/error_color"
             android:lines="1"
             />
     </com.google.android.material.textfield.TextInputLayout>
@@ -75,6 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lines="1"
+            android:inputType="textPassword"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
