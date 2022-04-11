@@ -1,4 +1,4 @@
-package com.example.signapp.signUpScreen
+package com.example.signapp.ui.signUpScreen
 
 interface SignUpView {
     fun setSignedUp()

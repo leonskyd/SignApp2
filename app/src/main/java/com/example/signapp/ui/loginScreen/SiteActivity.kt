@@ -1,11 +1,9 @@
-package com.example.signapp
+package com.example.signapp.ui.loginScreen
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.signapp.databinding.ActivityMainBinding
 import com.example.signapp.databinding.ActivitySiteBinding
-import com.example.signapp.loginScreen.MainActivity
 
 class SiteActivity : AppCompatActivity() {
 
@@ -18,7 +16,7 @@ class SiteActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        binding.backToLogin.setOnClickListener {
+        binding.comeBackButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }

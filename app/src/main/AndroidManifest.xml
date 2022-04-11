@@ -6,17 +6,18 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:name=".SignApp"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SignApp">
         <activity
-            android:name=".SiteActivity"
+            android:name=".ui.loginScreen.SiteActivity"
             android:exported="false" />
         <activity
-            android:name=".signUpScreen.SignUpActivity"
+            android:name="com.example.signapp.ui.signUpScreen.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".loginScreen.MainActivity"
+            android:name="com.example.signapp.ui.loginScreen.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

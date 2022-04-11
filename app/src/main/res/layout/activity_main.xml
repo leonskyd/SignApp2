@@ -8,11 +8,11 @@
     android:layout_height="match_parent"
     android:id="@+id/note_container"
     android:background="@color/design_default_color_background"
-    tools:context=".loginScreen.MainActivity">
+    tools:context=".ui.loginScreen.MainActivity">
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:id="@+id/error_container"
+        android:id="@+id/error_message_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent"
         >
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/error_message"
+            android:id="@+id/error_message_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/error_color"
@@ -32,8 +32,7 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
 
-
-
+    ------
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:id="@+id/login_container"
@@ -44,19 +43,17 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/error_container"
+        app:layout_constraintTop_toBottomOf="@+id/error_message_container"
         >
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/login"
+            android:id="@+id/login_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lines="1"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
-
-
-
+    --------
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:id="@+id/password_container"
@@ -70,7 +67,7 @@
         app:layout_constraintTop_toBottomOf="@+id/login_container"
         >
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password"
+            android:id="@+id/password_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lines="1"
