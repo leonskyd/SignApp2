@@ -1,12 +1,12 @@
-package com.example.signapp.loginScreen
+package com.example.signapp.ui.loginScreen
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import com.example.signapp.signUpScreen.SignUpActivity
-import com.example.signapp.SiteActivity
+import com.example.signapp.app
+import com.example.signapp.ui.signUpScreen.SignUpActivity
 import com.example.signapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), LoginView {
@@ -20,28 +20,31 @@ class MainActivity : AppCompatActivity(), LoginView {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        presenter = LoginPresenter()
+        presenter = getPresenter()
         presenter?.onAttach(this)
 
-
-        binding.signUpButton.setOnClickListener{
+        binding.signUpButton.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
 
-        binding.signInButton.setOnClickListener{
-            val login = binding.login.text.toString()
-            val password = binding.password.text.toString()
-            presenter?.onLogin(login,password)
+        binding.signInButton.setOnClickListener {
+            val login = binding.loginEditText.text.toString()
+            val password = binding.passwordEditText.text.toString()
+            presenter?.onLogin(login, password)
         }
 
-        binding.login.setOnFocusChangeListener{view, hasFocus ->
+        binding.loginEditText.setOnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) {
-                val login = binding.login.text.toString()
+                val login = binding.loginEditText.text.toString()
                 presenter?.checkLogin(login)
             }
         }
+    }
 
+    private fun getPresenter(): LoginPresenter? {
+        val presenter = lastCustomNonConfigurationInstance as? LoginPresenter
+        return presenter ?: LoginPresenter(app.loginInteractor)
     }
 
     override fun setSuccess() {
@@ -50,19 +53,19 @@ class MainActivity : AppCompatActivity(), LoginView {
     }
 
     override fun setLoginError() {
-        binding.errorContainer.visibility = View.VISIBLE
-        binding.errorMessage.setText(ERROR_LOGIN, TextView.BufferType.EDITABLE)
+        binding.errorMessageContainer.visibility = View.VISIBLE
+        binding.errorMessageEditText.setText(ERROR_LOGIN, TextView.BufferType.EDITABLE)
     }
 
     override fun setOneMoreLogin() {
-        binding.errorContainer.visibility = View.GONE
+        binding.errorMessageContainer.visibility = View.GONE
     }
 
     override fun setPasswordError() {
-        binding.errorContainer.visibility = View.VISIBLE
+        binding.errorMessageContainer.visibility = View.VISIBLE
         binding.forgetTextview.visibility = View.VISIBLE
         binding.progressBar.visibility = View.GONE
-        binding.errorMessage.setText(ERROR_PASSWORD, TextView.BufferType.EDITABLE)
+        binding.errorMessageEditText.setText(ERROR_PASSWORD, TextView.BufferType.EDITABLE)
     }
 
     override fun setLoading() {

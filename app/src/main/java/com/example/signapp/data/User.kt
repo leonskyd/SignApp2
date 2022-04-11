@@ -1,4 +1,4 @@
-package com.example.signapp.model
+package com.example.signapp.data
 
 data class User(
     val userId: Int,

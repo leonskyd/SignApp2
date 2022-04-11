@@ -1,4 +1,4 @@
-package com.example.signapp.model
+package com.example.signapp.data
 
 class Repository: RepositoryInterface {
 
@@ -20,6 +20,4 @@ class Repository: RepositoryInterface {
         var id = users.size + 1
         users.add(User(id, login, password))
     }
-
-
 }

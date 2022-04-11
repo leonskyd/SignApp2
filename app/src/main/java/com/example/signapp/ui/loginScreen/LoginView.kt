@@ -1,4 +1,4 @@
-package com.example.signapp.loginScreen
+package com.example.signapp.ui.loginScreen
 
 interface LoginView {
 

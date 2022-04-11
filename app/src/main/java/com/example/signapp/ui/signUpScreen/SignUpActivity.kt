@@ -1,11 +1,13 @@
-package com.example.signapp.signUpScreen
+package com.example.signapp.ui.signUpScreen
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.example.signapp.app
 import com.example.signapp.databinding.ActivitySignUpBinding
-import com.example.signapp.loginScreen.MainActivity
+import com.example.signapp.ui.loginScreen.LoginPresenter
+import com.example.signapp.ui.loginScreen.MainActivity
 
 class SignUpActivity : AppCompatActivity(), SignUpView {
 
@@ -18,25 +20,25 @@ class SignUpActivity : AppCompatActivity(), SignUpView {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        presenter = SignUpPresenter()
+        presenter = getSignUpPresenter()
         presenter?.onAttach(this)
 
 
-        binding.saveButton.setOnClickListener{
-            val login = binding.newLogin.text.toString()
-            val password = binding.newPassword.text.toString()
-            val confirmedPassword = binding.confirmPassword.text.toString()
-            if(presenter?.isPasswordConfirmed(password,confirmedPassword)==true) {
+        binding.saveButton.setOnClickListener {
+            val login = binding.newLoginEditText.text.toString()
+            val password = binding.newPasswordEditText.text.toString()
+            val confirmedPassword = binding.confirmPasswordEditText.text.toString()
+            if (presenter?.isPasswordConfirmed(password, confirmedPassword) == true) {
                 presenter?.onSignup(login, password)
                 setSignedUp()
             } else {
-             setPasswordNotConfirmed()
+                setPasswordNotConfirmed()
             }
         }
 
-        binding.newLogin.setOnFocusChangeListener{view, hasFocus ->
+        binding.newLoginEditText.setOnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) {
-                val login = binding.newLogin.text.toString()
+                val login = binding.newLoginEditText.text.toString()
                 presenter?.checkNewLogin(login)
             } else {
                 setOneMoreNewLogin()
@@ -44,8 +46,10 @@ class SignUpActivity : AppCompatActivity(), SignUpView {
         }
     }
 
-
-// Вьюшные методы
+    private fun getSignUpPresenter(): SignUpPresenter? {
+        val presenter = lastCustomNonConfigurationInstance as? SignUpPresenter
+        return presenter ?: SignUpPresenter(app.signUpInteractor)
+    }
 
     override fun setSignedUp() {
         val intent = Intent(this, MainActivity::class.java)
@@ -56,8 +60,9 @@ class SignUpActivity : AppCompatActivity(), SignUpView {
         binding.warningTextview.text = BUSY_LOGIN
         binding.warningTextview.visibility = View.VISIBLE
 
-        binding.confirmPasswordContainer.visibility = View.GONE // сделано для того, чтобы юзер не продолжил вводить пароль при занятом логине
-    // вместо этого хотел бы отключить возможность ввода в поля с паролями, но пока не понял как это делать.
+        binding.confirmPasswordContainer.visibility =
+            View.GONE // сделано для того, чтобы юзер не продолжил вводить пароль при занятом логине
+        // вместо этого хотел бы отключить возможность ввода в поля с паролями, но пока не понял как это делать.
     }
 
     override fun setPasswordNotConfirmed() {
@@ -67,6 +72,7 @@ class SignUpActivity : AppCompatActivity(), SignUpView {
 
     override fun setOneMoreNewLogin() {
         binding.warningTextview.visibility = View.GONE
-        binding.confirmPasswordContainer.visibility = View.VISIBLE // снова возвращаем поле для подтверждения пароля
+        binding.confirmPasswordContainer.visibility =
+            View.VISIBLE // снова возвращаем поле для подтверждения пароля
     }
 }
