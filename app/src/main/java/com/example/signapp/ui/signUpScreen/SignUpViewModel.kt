@@ -1,17 +1,17 @@
 package com.example.signapp.ui.signUpScreen
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.example.signapp.data.AppState
 import com.example.signapp.data.Repository
-import com.example.signapp.domain.SignUpInteractor
+import com.example.signapp.data.SignUpInteractor
 
-class SignUpPresenter(
+class SignUpViewModel (
     private val signUpInteractor: SignUpInteractor
-) {
+) : ViewModel() {
     private val repository = Repository()
-    private var view: SignUpView? = null
-
-    fun onAttach(view: SignUpView) {
-        this.view = view
-    }
+    private val state: MutableLiveData<AppState> = MutableLiveData()
 
     fun onSignup(login: String, password: String) {
         repository.addUser(login, password)
@@ -25,13 +25,14 @@ class SignUpPresenter(
         return confirmed
     }
 
-    fun checkNewLogin(login: String) {
+    fun checkNewLogin(login: String): LiveData<AppState> {
         signUpInteractor.checkLoginBusy(login) { loginBusy ->
             if (loginBusy) {
-                view?.setLoginIsBusy()
+                state.postValue(AppState.LoginBusy(true))
             } else {
-                view?.setOneMoreNewLogin()
+                state.postValue(AppState.OneMoreNewLogin)
             }
         }
+        return state
     }
 }

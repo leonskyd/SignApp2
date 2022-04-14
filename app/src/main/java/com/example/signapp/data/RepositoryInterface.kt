@@ -1,6 +1,7 @@
 package com.example.signapp.data
 
 import androidx.annotation.WorkerThread
+import com.example.signapp.domain.User
 
 interface RepositoryInterface {
     @WorkerThread

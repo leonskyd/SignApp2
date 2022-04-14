@@ -6,8 +6,8 @@ import android.os.Handler
 import android.os.Looper
 import com.example.signapp.data.Repository
 import com.example.signapp.data.RepositoryInterface
-import com.example.signapp.domain.LoginInteractor
-import com.example.signapp.domain.SignUpInteractor
+import com.example.signapp.data.LoginInteractor
+import com.example.signapp.data.SignUpInteractor
 
 class SignApp : Application() {
     val repo: RepositoryInterface by lazy { Repository() }
