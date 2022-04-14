@@ -1,5 +1,6 @@
 package com.example.signapp.ui
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.signapp.data.AppState
@@ -12,24 +13,27 @@ class LoginViewModel(
 
     private val state: MutableLiveData<AppState> = MutableLiveData()
 
-    fun onLogin(login: String, password: String) {
+    fun onLogin(login: String, password: String) : LiveData<AppState> {
         loginInteractor.login(login, password) { passwordChecked ->
             if (passwordChecked) {
                 //view?.setSuccess()
                 state.postValue(AppState.Success(true))
             } else {
-                state.postValue(AppState.Error(true,false)) // выходит сообщение об ошибке
+                state.postValue(AppState.PasswordError(true)) // выходит сообщение об ошибке
             }
         }
+        return state
     }
 
-    fun checkLogin(login: String) {
+    fun checkLogin(login: String): LiveData<AppState> {
         loginInteractor.checkLogin(login) { loginFound ->
             if (!loginFound) {
-                state.postValue(AppState.Error(false,true))
+                state.postValue(AppState.LoginError(true))
             } else {
                 state.postValue(AppState.oneMoreLogin)
             }
         }
+        return state
     }
+
 }
