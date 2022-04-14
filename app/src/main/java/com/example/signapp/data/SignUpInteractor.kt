@@ -1,7 +1,6 @@
-package com.example.signapp.domain
+package com.example.signapp.data
 
 import android.os.Handler
-import com.example.signapp.data.RepositoryInterface
 
 class SignUpInteractor(
     private val repository: RepositoryInterface,

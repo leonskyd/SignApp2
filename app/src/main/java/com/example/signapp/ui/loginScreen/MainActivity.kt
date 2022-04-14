@@ -11,7 +11,7 @@ import com.example.signapp.data.AppState
 import com.example.signapp.ui.signUpScreen.SignUpActivity
 import com.example.signapp.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), LoginView {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var viewModel: LoginViewModel? = null
@@ -76,28 +76,28 @@ class MainActivity : AppCompatActivity(), LoginView {
         }
     }
 
-    override fun setSuccess() {
+    private fun setSuccess() {
         val intent = Intent(this, SiteActivity::class.java)
         startActivity(intent)
     }
 
-    override fun setLoginError() {
+    private fun setLoginError() {
         binding.errorMessageContainer.visibility = View.VISIBLE
         binding.errorMessageEditText.setText(ERROR_LOGIN, TextView.BufferType.EDITABLE)
     }
 
-    override fun setOneMoreLogin() {
+    private fun setOneMoreLogin() {
         binding.errorMessageContainer.visibility = View.GONE
     }
 
-    override fun setPasswordError() {
+    private fun setPasswordError() {
         binding.errorMessageContainer.visibility = View.VISIBLE
         binding.forgetTextview.visibility = View.VISIBLE
         binding.progressBar.visibility = View.GONE
         binding.errorMessageEditText.setText(ERROR_PASSWORD, TextView.BufferType.EDITABLE)
     }
 
-    override fun setLoading() {
+    private fun setLoading() {
         binding.progressBar.visibility = View.VISIBLE
         binding.signUpButton.visibility = View.GONE
     }

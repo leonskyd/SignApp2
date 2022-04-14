@@ -8,10 +8,9 @@ import androidx.lifecycle.Observer
 import com.example.signapp.app
 import com.example.signapp.data.AppState
 import com.example.signapp.databinding.ActivitySignUpBinding
-import com.example.signapp.ui.loginScreen.LoginPresenter
 import com.example.signapp.ui.loginScreen.MainActivity
 
-class SignUpActivity : AppCompatActivity(), SignUpView {
+class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
     private var viewModel: SignUpViewModel? = null
@@ -65,24 +64,24 @@ class SignUpActivity : AppCompatActivity(), SignUpView {
         return viewModel ?: SignUpViewModel(app.signUpInteractor)
     }
 
-    override fun setSignedUp() {
+    private fun setSignedUp() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 
-    override fun setLoginIsBusy() {
+    private fun setLoginIsBusy() {
         binding.warningTextview.text = BUSY_LOGIN
         binding.warningTextview.visibility = View.VISIBLE
 
         binding.confirmPasswordContainer.visibility = View.GONE
     }
 
-    override fun setPasswordNotConfirmed() {
+    private fun setPasswordNotConfirmed() {
         binding.warningTextview.text = NOT_CONFIRMED_PASSWORD
         binding.warningTextview.visibility = View.VISIBLE
     }
 
-    override fun setOneMoreNewLogin() {
+    private fun setOneMoreNewLogin() {
         binding.warningTextview.visibility = View.GONE
         binding.confirmPasswordContainer.visibility = View.VISIBLE
     }

@@ -1,5 +1,7 @@
 package com.example.signapp.data
 
+import com.example.signapp.domain.User
+
 class Repository: RepositoryInterface {
 
     // Эмуляция загрузки пользователей из БД

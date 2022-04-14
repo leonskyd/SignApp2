@@ -1,4 +1,4 @@
-package com.example.signapp.ui
+package com.example.signapp.ui.loginScreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -30,7 +30,7 @@ class LoginViewModel(
             if (!loginFound) {
                 state.postValue(AppState.LoginError(true))
             } else {
-                state.postValue(AppState.oneMoreLogin)
+                state.postValue(AppState.OneMoreLogin)
             }
         }
         return state

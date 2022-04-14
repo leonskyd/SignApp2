@@ -1,4 +1,4 @@
-package com.example.signapp.domain
+package com.example.signapp.data
 
 import androidx.annotation.MainThread
 
