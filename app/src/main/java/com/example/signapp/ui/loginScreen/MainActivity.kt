@@ -6,12 +6,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.signapp.app
 import com.example.signapp.data.AppState
 import com.example.signapp.ui.signUpScreen.SignUpActivity
 import com.example.signapp.databinding.ActivityMainBinding
-import com.example.signapp.ui.LoginViewModel
 
 class MainActivity : AppCompatActivity(), LoginView {
 
@@ -26,7 +24,6 @@ class MainActivity : AppCompatActivity(), LoginView {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = getViewModel()
-        //presenter?.onAttach(this)
 
         binding.signUpButton.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
@@ -37,31 +34,48 @@ class MainActivity : AppCompatActivity(), LoginView {
             val login = binding.loginEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
             viewModel?.onLogin(login, password)?.observe(
-                this, Observer <AppState>{state -> render(state)})
+                this, Observer<AppState> { state -> render(state) })
         }
 
-       binding.loginEditText.setOnFocusChangeListener { view, hasFocus ->
+        binding.loginEditText.setOnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) {
                 val login = binding.loginEditText.text.toString()
                 viewModel?.checkLogin(login)?.observe(
-                    this, Observer <AppState>{state -> render(state)})
+                    this, Observer<AppState> { state -> render(state) })
             }
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        AppState.Success(false)
+        AppState.PasswordError(false)
+        AppState.LoginError(false)
+    }
+
     private fun getViewModel(): LoginViewModel? {
         val viewModel = lastCustomNonConfigurationInstance as? LoginViewModel
-        return viewModel?:LoginViewModel(app.loginInteractor)
+        return viewModel ?: LoginViewModel(app.loginInteractor)
 
     }
+
     private fun render(state: AppState?) {
         when (state) {
-            is AppState.Success -> {setSuccess()}
-            is AppState.PasswordError -> {setPasswordError()}
-            is AppState.LoginError -> {setLoginError()}
-            is AppState.oneMoreLogin ->{setOneMoreLogin()}
+            is AppState.Success -> {
+                setSuccess()
+            }
+            is AppState.PasswordError -> {
+                setPasswordError()
+            }
+            is AppState.LoginError -> {
+                setLoginError()
+            }
+            is AppState.OneMoreLogin -> {
+                setOneMoreLogin()
+            }
         }
     }
+
     override fun setSuccess() {
         val intent = Intent(this, SiteActivity::class.java)
         startActivity(intent)
@@ -87,8 +101,6 @@ class MainActivity : AppCompatActivity(), LoginView {
         binding.progressBar.visibility = View.VISIBLE
         binding.signUpButton.visibility = View.GONE
     }
-
-
 }
 
 
