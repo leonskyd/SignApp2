@@ -19,7 +19,6 @@ class Repository: RepositoryInterface {
         var users = loadUsers()
         var id = users.size + 1
         users.add(User(id, login, password))
+        return users
     }
-
-
 }
