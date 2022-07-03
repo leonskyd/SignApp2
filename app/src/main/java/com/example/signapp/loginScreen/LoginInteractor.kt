@@ -27,4 +27,16 @@ class LoginInteractor {
         }
         return passwordChecked
     }
+    
+     fun showUsers() {
+        val userList = repository.loadUsers()
+        for (item in userList) {
+            showLogin(item)
+        }
+    }
+
+    fun showLogin(item: User): String? {
+        val login = item.userLogin
+        return login
+    }
 }
