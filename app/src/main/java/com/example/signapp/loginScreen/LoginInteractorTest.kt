@@ -48,4 +48,14 @@ class LoginInteractorTest {
     fun checkPassword_UpperCaseLoginCorrectPassword_ReturnsFalse() {
         assertFalse(loginInteractor.checkPassword("MITIN", "34567"))
     }
+    
+    // for fun showLogin(item: User): String {}
+    @Test
+    fun showLogin_LoginIsNotNull() {
+        assertNotNull(loginInteractor.showLogin(User(1,"petrov","12345")))
+    }
+    @Test
+    fun showLogin_LoginIsNull() {
+        assertNull((loginInteractor.showLogin(User(1,null,"12345"))))
+    }
 }
